@@ -170,7 +170,6 @@ def grabpatch():
 
     p = patch(m.group (1))
     NextLine = sys.stdin.readline ()
-    ignore = (FileFilter is not None)
     while NextLine:
         Line = NextLine
         #
@@ -254,20 +253,23 @@ def grabpatch():
                 sys.stderr.write ('Funky date: %s\n' % p.date)
                 p.date = Today
             continue
-        #
-        # If we have a file filter, check for file lines.
-        #
-#        if FileFilter:
-        ignore = ApplyFileFilter (Line, ignore)
-        #
-        # OK, maybe it's part of the diff itself.
-        #
-        if not ignore:
-            if Padd.match (Line):
-                p.added += 1
+
+        # Get the statistics (lines added/removes) using numstats
+        # and without requiring a diff (--numstat instead -p)
+        m = Pnumstat.match (Line)
+        if m:
+            # If we have a file filter, check for file lines.
+            sys.stderr.write ('Funky date: %s\n' % m.group(3))
+            if FileFilter and not FileFilter.search (m.group(3)):
                 continue
-            if Prem.match (Line):
-                p.removed += 1
+
+            try:
+                p.added += int(m.group(1))
+                p.removed += int(m.group(2))
+            except ValueError:
+                # A binary file (image, etc.) is marked with '-'
+                pass
+
 
     if '@' in p.author.name:
         GripeAboutAuthorName (p.author.name)
