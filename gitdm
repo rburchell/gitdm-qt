@@ -247,8 +247,8 @@ def grabpatch():
         #
         # If we have a file filter, check for file lines.
         #
-        if FileFilter:
-            ignore = ApplyFileFilter (Line, ignore)
+#        if FileFilter:
+        ignore = ApplyFileFilter (Line, ignore)
         #
         # OK, maybe it's part of the diff itself.
         #
@@ -277,17 +277,15 @@ def ApplyFileFilter (line, ignore):
     #
     m = Pfilea.match (line)
     if m:
-        file = m.group (1)
-        if FileFilter.search (file):
-            return 0
-        return 1
+        if "translations" in line:
+            return 1
+        return 0
     #
     # For the second line, we can turn ignore off, but not on
     #
     m = Pfileb.match (line)
     if m:
-        file = m.group (1)
-        if FileFilter.search (file):
+        if not "translations" in line:
             return 0
     return ignore
 
