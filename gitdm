@@ -344,9 +344,11 @@ while (1):
     p = grabpatch()
     if not p:
         break
-#    if p.added > 100000 or p.removed > 100000:
-#        print 'Skipping massive add', p.commit
-#        continue
+
+    # TODO: better heuristics here
+    if p.added > 10000 or p.removed > 10000:
+        print 'Skipping massive add', p.commit
+        continue
     if FileFilter and p.added == 0 and p.removed == 0:
         continue
 
