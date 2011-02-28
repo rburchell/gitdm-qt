@@ -2,4 +2,10 @@
 # This is the email aliases file, mapping secondary addresses
 # onto a single, canonical address.
 #
-corbet@eklektix.com	corbet@lwn.net
+
+# these guys are really doing work for Intel
+krh@bitplanet.net krh@intel.com
+jbarnes@virtuousgeek.org jbarnes@intel.com
+
+# rittk is a one man machine, really
+ritt.ks@gmail.com ritt.ks@rittk.com
