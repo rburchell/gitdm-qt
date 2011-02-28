@@ -278,6 +278,27 @@ def ReportByRepCreds (hlist):
 
 
 
+# Merge request reporting
+def CompareMRCred (h1, h2):
+    return h2.mrcred - h1.mrcred
+
+def ReportByMRs (hlist):
+    hlist.sort (CompareMRCred)
+    totalreps = 0
+    for h in hlist:
+        totalreps += h.mrcred
+    count = 0
+    BeginReport ('Developers who merged the most contributions (total %d)' % totalreps)
+    for h in hlist:
+        if h.mrcred > 0:
+            ReportLine (h.name, h.mrcred, (h.mrcred*100.0)/totalreps)
+        count += 1
+        if count >= ListCount:
+            break
+    EndReport ()
+
+
+
 def CompareESOBs (e1, e2):
     return e2.sobs - e1.sobs
 
@@ -325,6 +346,7 @@ def DevReports (hlist, totalchanged, cscount, totalremoved):
     ReportByTests (hlist)
     ReportByTestCreds (hlist)
     ReportByReports (hlist)
+    ReportByMRs(hlist)
     ReportByRepCreds (hlist)
 
 def EmplReports (elist, totalchanged, cscount):

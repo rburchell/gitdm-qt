@@ -231,6 +231,11 @@ def grabpatch():
             p.author.reportcredit (patch)
             p.author.testcredit (patch)
             continue
+        m = Pmergerequest.match(Line) # Merge-request
+        if m:
+            # requires --pretty=fuller to git log
+            p.committer.mergerequestcredit(patch)
+            continue
         #
         # If this one is a merge, make note of the fact.
         #

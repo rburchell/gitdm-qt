@@ -31,6 +31,7 @@ Preview = re.compile (r'^\s+Reviewed-by:' + Pemail + '.*$')
 Ptest = re.compile (r'^\s+tested-by:' + Pemail + '.*$', re.I)
 Prep = re.compile (r'^\s+Reported-by:' + Pemail + '.*$')
 Preptest = re.compile (r'^\s+reported-and-tested-by:' + Pemail + '.*$', re.I)
+Pmergerequest = re.compile(r'^\s+Merge-request:.*$')
 #
 # Merges are described with a variety of lines.
 #

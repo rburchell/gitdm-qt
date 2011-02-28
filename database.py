@@ -24,7 +24,7 @@ class Hacker:
         self.reviews = [ ]
         self.tested = [ ]
         self.reports = [ ]
-        self.testcred = self.repcred = 0
+        self.testcred = self.repcred = self.mrcred = 0
 
     def addemail (self, email, elist):
         self.email.append (email)
@@ -61,6 +61,8 @@ class Hacker:
         self.repcred += 1
     def testcredit (self, patch):
         self.testcred += 1
+    def mergerequestcredit(self, patch):
+        self.mrcred += 1
 
 HackersByName = { }
 HackersByEmail = { }
