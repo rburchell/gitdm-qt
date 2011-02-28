@@ -18,6 +18,7 @@ import re
 #
 Pemail = r'\s+"?([^<"]+)"?\s<([^>]+)>' # just email addr + name
 Pcommit = re.compile (r'^commit ([0-9a-f ]+)$')
+Pcommitter = re.compile (r'^Commit:' + Pemail + '$')
 Pauthor = re.compile (r'^Author:' + Pemail + '$')
 Psob = re.compile (r'^\s+Signed-off-by:' + Pemail + '.*$')
 Pmerge = re.compile (r'^Merge:.*$')

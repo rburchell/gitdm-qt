@@ -139,6 +139,7 @@ class patch:
         self.commit = commit
         self.merge = self.added = self.removed = 0
         self.author = LookupStoreHacker('Unknown hacker', 'unknown@hacker.net')
+        self.committer = LookupStoreHacker('Unknown hacker', 'unknown@hacker.net')
         self.email = 'unknown@hacker.net'
         self.sobs = [ ]
         self.reviews = [ ]
@@ -186,6 +187,10 @@ def grabpatch():
         if m:
             p.email = database.RemapEmail (m.group (2))
             p.author = LookupStoreHacker(m.group (1), p.email)
+            continue
+        m = Pcommitter.match(Line)
+        if m:
+            p.committer = LookupStoreHacker(m.group(1), database.RemapEmail(m.group(2)))
             continue
         #
         # Could be a signed-off-by:
