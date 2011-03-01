@@ -357,10 +357,10 @@ while (1):
         break
 
     # TODO: better heuristics here
-    if p.added > 10000 or p.removed > 10000:
-        print 'Skipping massive add', p.commit
+    if p.added + p.removed > 10000:
+        print 'Skipping massive commit %s by %s' % (p.commit, p.author.email)
         continue
-    if FileFilter and p.added == 0 and p.removed == 0:
+    if p.added == 0 and p.removed == 0:
         continue
 
     #
