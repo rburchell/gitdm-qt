@@ -276,7 +276,7 @@ def grabpatch():
     return p
 
 def DoFilterFile(fileName):
-    if ".ts" in fileName:
+    if fileName.endswith(".ts"):
         sys.stderr.write ('Ignoring file: %s\n' % fileName)
         return True
     elif "translations/" in fileName:
