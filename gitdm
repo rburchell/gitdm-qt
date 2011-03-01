@@ -259,8 +259,7 @@ def grabpatch():
         m = Pnumstat.match (Line)
         if m:
             # If we have a file filter, check for file lines.
-            sys.stderr.write ('Funky date: %s\n' % m.group(3))
-            if FileFilter and not FileFilter.search (m.group(3)):
+            if DoFilterFile (m.group(3)):
                 continue
 
             try:
@@ -275,6 +274,16 @@ def grabpatch():
         GripeAboutAuthorName (p.author.name)
 
     return p
+
+def DoFilterFile(fileName):
+    if ".ts" in fileName:
+        sys.stderr.write ('Ignoring file: %s\n' % fileName)
+        return True
+    elif "translations/" in fileName:
+        sys.stderr.write ('Ignoring file: %s\n' % fileName)
+        return True
+
+    return False
 
 def GripeAboutAuthorName (name):
     if name in GripedAuthorNames:
