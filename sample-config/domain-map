@@ -310,7 +310,7 @@ yahoo-inc.com	Yahoo
 digia.com Digia
 codethink.co.uk Codethink
 mabrand.nl M. A. Brand Consulting
-rittk.com rittk
+#rittk.com rittk
 collabora.co.uk Collabora
 trolltech.com Nokia
 ixonos.com Ixonos
@@ -328,9 +328,9 @@ ilm.com Lucasfilm
 medical-insight.com Medical-Insight
 igalia.com Igalia
 tandberg.com Tandberg
-webkit.org Webkit
+#webkit.org Webkit
 codeminded.be Codeminded
 
 # safe to say these people are probably KDE
-kde.org KDE
-kde.gr.jp KDE
+#kde.org KDE
+#kde.gr.jp KDE
