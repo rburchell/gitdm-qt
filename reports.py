@@ -334,6 +334,25 @@ def ReportByESOBs (elist):
         if count >= ListCount:
             break
     EndReport ()
+
+def CompareEBugfixes (e1, e2):
+    return e2.bugfixes - e1.bugfixes
+
+def ReportByEBugfixes (elist):
+    elist.sort (CompareEBugfixes)
+    totalsobs = 0
+    for e in elist:
+        totalsobs += e.bugfixes
+    count = 0
+    BeginReport ('Employers with the most bugfixes (total %d)' % totalsobs)
+    for e in elist:
+        if e.bugfixes > 0:
+            ReportLine (e.name, e.bugfixes, (e.bugfixes*100.0)/totalsobs)
+        count += 1
+        if count >= ListCount:
+            break
+    EndReport ()
+
    
 def CompareHackers (e1, e2):
     return len (e2.hackers) - len (e1.hackers)
@@ -366,11 +385,12 @@ def DevReports (hlist, totalchanged, cscount, totalremoved):
 #    ReportByReports (hlist)
     ReportByMRs(hlist)
     ReportByBugs(hlist)
-    ReportByRepCreds (hlist)
+#    ReportByRepCreds (hlist)
 
 def EmplReports (elist, totalchanged, cscount):
     ReportByPCEmpl (elist, cscount)
     ReportByELChanged (elist, totalchanged)
-    ReportByESOBs (elist)
+#    ReportByESOBs (elist)
+    ReportByEBugfixes(elist)
     ReportByEHackers (elist)
     

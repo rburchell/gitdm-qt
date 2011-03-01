@@ -128,6 +128,7 @@ class Employer:
         self.name = name
         self.added = self.removed = self.count = self.changed = 0
         self.sobs = 0
+        self.bugfixes = 0
         self.hackers = [ ]
 
     def AddCSet (self, patch):
@@ -140,6 +141,9 @@ class Employer:
 
     def AddSOB (self):
         self.sobs += 1
+
+    def AddBugFix(self):
+        self.bugfixes += 1
 
 Employers = { }
 

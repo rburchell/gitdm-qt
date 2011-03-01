@@ -238,6 +238,8 @@ def grabpatch():
         m = Ptaskfix.match(Line) # bug fix
         if m:
             p.author.bugfixcredit(patch)
+            empl = p.author.emailemployer (p.email, p.date)
+            empl.AddBugFix()
             continue
         #
         # If this one is a merge, make note of the fact.
