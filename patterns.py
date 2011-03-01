@@ -30,6 +30,7 @@ Ptest = re.compile (r'^\s+tested-by:' + Pemail + '.*$', re.I)
 Prep = re.compile (r'^\s+Reported-by:' + Pemail + '.*$')
 Preptest = re.compile (r'^\s+reported-and-tested-by:' + Pemail + '.*$', re.I)
 Pmergerequest = re.compile(r'^\s+Merge-request:.*$')
+Ptaskfix = re.compile(r'^\s+Task-number:.*$')
 #
 # Merges are described with a variety of lines.
 #

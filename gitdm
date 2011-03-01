@@ -235,6 +235,10 @@ def grabpatch():
             # requires --pretty=fuller to git log
             p.committer.mergerequestcredit(patch)
             continue
+        m = Ptaskfix.match(Line) # bug fix
+        if m:
+            p.author.bugfixcredit(patch)
+            continue
         #
         # If this one is a merge, make note of the fact.
         #

@@ -297,6 +297,24 @@ def ReportByMRs (hlist):
             break
     EndReport ()
 
+# Bugfix request reporting
+def CompareBugfixCred (h1, h2):
+    return h2.bugfixcred - h1.bugfixcred
+
+def ReportByBugs (hlist):
+    hlist.sort (CompareBugfixCred)
+    totalreps = 0
+    for h in hlist:
+        totalreps += h.bugfixcred
+    count = 0
+    BeginReport ('Developers who fixed the most bugs (total %d)' % totalreps)
+    for h in hlist:
+        if h.bugfixcred > 0:
+            ReportLine (h.name, h.bugfixcred, (h.bugfixcred*100.0)/totalreps)
+        count += 1
+        if count >= ListCount:
+            break
+    EndReport ()
 
 
 def CompareESOBs (e1, e2):
@@ -343,10 +361,11 @@ def DevReports (hlist, totalchanged, cscount, totalremoved):
     ReportByLRemoved (hlist, totalremoved)
     ReportBySOBs (hlist)
     ReportByRevs (hlist)
-    ReportByTests (hlist)
-    ReportByTestCreds (hlist)
-    ReportByReports (hlist)
+#    ReportByTests (hlist)
+#    ReportByTestCreds (hlist)
+#    ReportByReports (hlist)
     ReportByMRs(hlist)
+    ReportByBugs(hlist)
     ReportByRepCreds (hlist)
 
 def EmplReports (elist, totalchanged, cscount):
