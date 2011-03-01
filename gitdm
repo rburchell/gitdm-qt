@@ -363,7 +363,7 @@ while (1):
         break
 
     # TODO: better heuristics here
-    if p.added + p.removed > 10000:
+    if p.added + p.removed > 25000:
         print 'Skipping massive commit %s by %s' % (p.commit, p.author.email)
         continue
     if p.added == 0 and p.removed == 0:
