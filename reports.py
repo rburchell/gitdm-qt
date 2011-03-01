@@ -378,7 +378,7 @@ def DevReports (hlist, totalchanged, cscount, totalremoved):
     ReportByPCount (hlist, cscount)
     ReportByLChanged (hlist, totalchanged)
     ReportByLRemoved (hlist, totalremoved)
-    ReportBySOBs (hlist)
+#    ReportBySOBs (hlist)
     ReportByRevs (hlist)
 #    ReportByTests (hlist)
 #    ReportByTestCreds (hlist)
