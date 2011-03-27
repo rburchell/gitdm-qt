@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
 #
 
 #
@@ -91,17 +93,43 @@ def ParseOpts ():
             DumpDB = 1
         
 
+# make a good attempt at helping for matching Kjernåsen -> Kjernaasen
+# this is just for matching purposes!
+def accentName(name):
+    # scandinavian
+    name = name.replace("aa", "å");
+
+    return name
 
 def LookupStoreHacker (name, email):
+    # have we seen this email before?
     email = database.RemapEmail (email)
     h = database.LookupEmail (email)
-    if h: # already there
-        return h
-    elist = database.LookupEmployer (email, MapUnknown)
+    if h:
+        # does their name look remotely similar to the name we have now?
+        ename = accentName(h.name.lower());
+        nname = accentName(name.lower());
+        if nname in ename:
+            # yes
+            return h
+
+    # try find via name
     h = database.LookupName (name)
-    if h: # new email
-        h.addemail (email, elist)
+    if not h:
+        # try look up their accented name
+        h = database.LookupName(accentName(name))
+        if h:
+            sys.stderr.write ('Found an accented match for %s (at %s)' % (name, email))
+
+    if h:
+        if not email in h.email:
+            # new address
+            elist = database.LookupEmployer (email, MapUnknown)
+            h.addemail (email, elist)
         return h
+
+    # no; new hacker presumably
+    elist = database.LookupEmployer (email, MapUnknown)
     return database.StoreHacker(name, elist, email)
 
 #
